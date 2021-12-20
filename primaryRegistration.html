@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>PRIMARY REGISTRATION</title>
+</head>
+<body>
+<h1>PRIMARY REGISTRATION</h1>
+<form>
+<label for = "firstName">FIRST NAME<label>
+<input type = "text" id = "firstName" required><br>
+<label for = "lastName">LAST NAME<label>
+<input type = "text" id = "lastName" required><br>
+<label for = "address">ADDRESS<label>
+<input type = "textarea" id = "address" required><br>
+<label for = "aadhar">AADHAR<label>
+<input type = "text" placeholder="675455569765" id = "aadhar" required><br>
+<label for = "pan">PAN<label>
+<input type = "text" placeholder="BNZAA2318J" id = "pan" required><br>
+<button type="button" id = "next" >SUBMIT</button>
+</form>
+</body>
+<script>
+if (!localStorage.getItem("isLoggedIn")){
+	window.location.replace("loginAccount.html")
+}
+let nxt = document.getElementById("next")
+nxt.addEventListener("click",function(){
+	let fn = document.getElementById("firstName")
+	let ln = document.getElementById("lastName")
+	let adrs = document.getElementById("address")
+	let adhr = document.getElementById("aadhar")
+	let pan = document.getElementById("pan")
+			
+	if (fn.value === '' || ln.value === '' || adrs.value === '' || adhr.value === '' || pan.value === '')  {
+		alert("Please fill the details completely")
+	}
+	else if(!adhr.value.match(/^[2-9]{1}[0-9]{11}$/) || !pan.value.match(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/)){
+		alert("Please fill the aadhar or pan with correct format")
+	}
+	else {
+		let jsonobj = {}
+		let jsonarr = []
+		let len=0;
+		if (localStorage.getItem("clientDetails") !== null) {
+ 			jsonarr = JSON.parse(localStorage.getItem("clientDetails"));
+ 			len=jsonarr.length
+		}		
+		jsonobj["id"]=++len
+		jsonobj["firstName"] = fn.value
+		jsonobj["lastName"] = ln.value
+		jsonobj["address"] = adrs.value
+		jsonobj["aadhar"] = adhr.value
+		jsonobj["pan"] = pan.value
+		jsonarr.push(jsonobj)	
+		localStorage.setItem("clientDetails",JSON.stringify(jsonarr));
+		window.location.href="client.html",true;			
+	}
+})
+</script>
+</html>

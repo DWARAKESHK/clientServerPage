@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>clientProfile</title>
+</head>
+<body>
+<h1>Client Profile</h1>
+<table>
+<tr>
+<td>First Name</td>
+<td id = "firstName"></td>
+</tr>
+<tr>
+<td>Last Name</td>
+<td id = "lastName"></td>
+</tr>
+<tr>
+<td>Address</td>
+<td id = "address"></td>
+</tr>
+<tr>
+<td>Aadhar</td>
+<td id = "aadhar"></td>
+</tr>
+<tr>
+<td>Pan</td>
+<td id = "pan"></td>
+</tr>
+</table>
+<button onclick="location.href='client.html'" type="button">Go Back</button>
+</body>
+<script>
+if (!localStorage.getItem("isLoggedIn")){
+	window.location.replace("loginAccount.html")
+}
+let cltDts =JSON.parse(localStorage.getItem("clientDetails"))
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const id = urlParams.get('clientId');
+
+for(var i = 0; i < cltDts.length; i++) {
+    var obj = cltDts[i];  
+    if(obj.id === parseInt(id)){
+    	console.log(obj);
+    	document.getElementById("firstName").innerText=obj.firstName;
+    	document.getElementById("lastName").innerText=obj.lastName;
+    	document.getElementById("address").innerText=obj.address;
+    	document.getElementById("aadhar").innerText=obj.aadhar;
+    	document.getElementById("pan").innerText=obj.pan;
+    	break;
+    }
+}
+</script>
+</html>

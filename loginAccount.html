@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>LOGIN ACCOUNT</title>
+<style>
+body{
+	background-image :url("bgImg1.jpg");
+	background-repeat:no-repeat;
+    	background-size:100% 100%;
+}
+#mainContainer{
+	display:flex;
+	justify-content:center;
+}
+#innerContainer{
+	background: white;
+	padding : 50px;
+	justify-content: center;
+	margin-top: 15%;
+}
+input{
+	width : 150px;
+	height : 20px;
+	margin-bottom: 5px;
+}
+button{
+	width : 150px;
+	height : 20px;
+	
+}
+</style>
+</head>
+<body>
+<div id = "mainContainer">
+<div id = "innerContainer">
+<h1>LOGIN ACCOUNT</h1>
+<input type = "email" id = "email" placeholder = "E-MAIL ID"><br>
+<input type = "password" id = "password" placeholder = "PASSWORD"><br>
+<hr>
+<button id = "login-btn">Login</button>
+</div>
+</div>
+</body>
+<script>
+localStorage.setItem("isLoggedIn",false)
+const email = "dwarakesh19k@gmail.com"
+const password = "admin"
+let emailIn = document.getElementById("email")
+let passwordIn = document.getElementById("password")
+let logbtn = document.getElementById("login-btn")
+logbtn.addEventListener("click",function (){
+	console.log("login button is clicked")
+	if(emailIn.value == email && passwordIn.value == password){
+		localStorage.setItem("isLoggedIn",true)
+		window.location.replace("primaryRegistration.html")
+	}
+	else{
+		alert("Please enter the correct email id and password")
+	}
+})
+</script>
+</html>

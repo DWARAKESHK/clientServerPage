@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Clients</title>
+</head>
+<body>
+<h1>Clients</h1>
+<table id="client-tbl">
+<tbody>
+<tr>
+<th>First Name</th>
+<th>Last Name</th>
+<th>Aadhar</th>
+<th>Profile</th>
+</tr>
+</tbody>
+</table>
+<button onclick="location.href='primaryRegistration.html'" type="button">Add client</button>
+</body>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+<script>
+if (!localStorage.getItem("isLoggedIn")){
+	window.location.replace("loginAccount.html")
+}
+let cltDts =JSON.parse(localStorage.getItem("clientDetails"))
+for(var i = 0; i < cltDts.length; i++) {
+    var obj = cltDts[i];   
+    $('#client-tbl tbody').append('<tr><td>'+ obj.firstName +'</td><td>'+ obj.lastName +'</td><td>'+ obj.aadhar +'</td><td><button> <a href="file:///home/gokul/Desktop/javascript/clientServerPage/clientProfile.html?clientId='+obj.id+'"> view profile</a></button></td></tr>');
+    console.log(obj);
+}
+</script>
+</html>
